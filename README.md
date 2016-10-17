@@ -4,7 +4,7 @@ A self-contained class file for use in your Access or Excel projects.  This file
 
 This file simply refactors IBM's Host Access Class Library (HACL) for readability and ease-of-use.
 
-The original documentation can be found here (current as of October 2016):
+Not every single method has been included, just many of the ones I've tested and used live.  For the complete exhaustive list, visit the original documentation here (current as of October 2016):
 https://www.ibm.com/support/knowledgecenter/SSEQ5Y_6.0.0/com.ibm.pcomm.doc/books/html/host_access08.htm
 
 ## Getting Started
