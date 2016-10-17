@@ -62,6 +62,6 @@ This file is a refactor of IBM's Host Access Class Library (HACL). IBM provides 
 
 https://www.ibm.com/support/knowledgecenter/SSEQ5Y_6.0.0/com.ibm.pcomm.doc/books/html/host_access08.htm
 
-Use of the HACL itself should be deferred to IBM's and Microsoft's usage guidelines.  
+Use of the HACL itself should defer to IBM's usage guidelines.  
 
-Any transformative code that does not necessarily need to fall under these aforementioned guidelines is licensed and freely available under the [License].
+Any transformative code made by me that doesn't necessarily fall under these guidelines is available for use under the [License].
