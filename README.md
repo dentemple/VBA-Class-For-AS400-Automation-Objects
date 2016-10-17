@@ -20,7 +20,7 @@ An optional module has also been included that provides example usage and additi
 
 This file assumes that your VBA code can access the iSeries directly, such as through a desktop installation or a remote connection.
 
-If an additional layer exists between you and the iSeries--for example, if you are on a thin-client, or if your company utilizes an web-interface to access the AS400--then additional steps may need to be taken to successfully utilize the HACL objects.
+If an additional layer exists between you and the iSeries&#8212;for example, if you are on a thin-client, or if your company utilizes an web-interface to access the AS400&#8212;then additional steps may need to be taken to successfully utilize the HACL objects.
 
 This may be as simple as early-binding the HACL or flipping over a single a network setting; or, it can be as complicated as integrating this code with an automated web-scraper built from scratch with JavaScript.
 
@@ -59,6 +59,7 @@ Den Temple | dentemple.io
 ## License
 
 This file is a refactor of IBM's Host Access Class Library (HACL). IBM provides documentation regarding the HACL here:
+
 https://www.ibm.com/support/knowledgecenter/SSEQ5Y_6.0.0/com.ibm.pcomm.doc/books/html/host_access08.htm
 
 Use of the HACL itself should be deferred to IBM's and Microsoft's usage guidelines.  
