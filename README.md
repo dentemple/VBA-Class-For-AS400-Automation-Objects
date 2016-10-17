@@ -58,4 +58,4 @@ https://www.ibm.com/support/knowledgecenter/SSEQ5Y_6.0.0/com.ibm.pcomm.doc/books
 
 Use of the HACL itself should be deferred to IBM's and Microsoft's usage guidelines.  
 
-Any transformative code that does not necessarily need to fall under these aforementioned guidelines is licensed under the [License].
+Any transformative code that does not necessarily need to fall under these aforementioned guidelines is licensed and freely available under the [License].
