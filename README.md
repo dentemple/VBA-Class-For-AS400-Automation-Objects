@@ -21,7 +21,7 @@ This file assumes both you and VBA can access the iSeries directly, such as thro
 
 If an additional layer exists between you and the iSeries--for example, if you are on a thin-client, or if your company utilizes an iSeries web-interface--then additional steps may need to be taken to successfully utilize the HACL.
 
-Troubleshooting these situations are beyond my current scope; however, I invite the community to copy or extend these files with their own solutions.
+Troubleshooting these situations are beyond my current scope; however, I invite the wider community to copy or extend these files with their own solutions for these issues.
 
 ## Optional Pre-Download Test
 
@@ -41,7 +41,7 @@ IF YOU ARE USING MS ACCESS, please remember that  MS Access `True` may not alway
 
 I've lost quite a few frustrating hours to Access's ability to inadvertently evaluate `True = True` situations to `False`.
 
-Therefore, remember that these methods will pass "truthiness" directly from the AS400--and that any subsequent  comparisons made in Access should be done defensively.
+Therefore, remember that these methods will pass "truthiness" directly from the AS400--and that any subsequent comparisons made in Access should be done defensively.
 
 ### Regarding duplicate HACL methods
 
