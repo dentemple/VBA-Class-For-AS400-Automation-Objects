@@ -18,11 +18,13 @@ An optional module has also been included that provides example usage and additi
 
 ### IMPORTANT NOTICE
 
-This file assumes both you and VBA can access the iSeries directly, such as through a desktop installation or a remote connection.
+This file assumes that your VBA code can access the iSeries directly, such as through a desktop installation or a remote connection.
 
-If an additional layer exists between you and the iSeries--for example, if you are on a thin-client, or if your company utilizes an iSeries web-interface--then additional steps may need to be taken to successfully utilize the HACL.
+If an additional layer exists between you and the iSeries--for example, if you are on a thin-client, or if your company utilizes an web-interface to access the AS400--then additional steps may need to be taken to successfully utilize the HACL objects.
 
-Troubleshooting these situations are beyond my current scope; however, I invite the wider community to copy or extend these files with their own solutions for these issues.
+This may be as simple as early-binding the HACL or changing a network setting; or, it can be as complicated as integrating this code with a web-scraper.
+
+Troubleshooting these situations are, however, beyond my current scope.  Still, I invite the community at large to copy or extend these files with their own solutions regarding these issues.
 
 ## Optional Pre-Download Test
 
