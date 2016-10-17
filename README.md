@@ -1,6 +1,6 @@
 # VBA Wrappers For AS400 Automation Objects
 
-A self-contained class file for use in your Access or Excel projects.  This file contains late-binded class methods that allows you--the power user--to control an iSeries (AS400) client-side interface.
+A self-contained class file for use in your Access or Excel projects.  This file contains late-binded class methods that allows you&#8212the power user&#8212to control an iSeries (AS400) client-side interface.
 
 This file simply refactors IBM's Host Access Class Library (HACL) for readability and ease-of-use.
 
