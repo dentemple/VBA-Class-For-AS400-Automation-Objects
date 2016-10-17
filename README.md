@@ -24,6 +24,8 @@ If an additional layer exists between you and the iSeries--for example, if you a
 
 This may be as simple as early-binding the HACL or changing a network setting; or, it can be as complicated as integrating this code with a web-scraper.
 
+(Because heavens forbid we actually change anything on the iSeries' backend to make everyone's lives easier).
+
 Troubleshooting these situations are, however, beyond my current scope.  Still, I invite the community at large to copy or extend these files with their own solutions regarding these issues.
 
 ## Optional Pre-Download Test
