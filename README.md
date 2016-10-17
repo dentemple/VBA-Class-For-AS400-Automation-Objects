@@ -44,7 +44,7 @@ To remain consistent, this class file does the same, even in cases where an inte
 
 IF YOU ARE USING MS ACCESS, please remember that `True` in MS Access may not always be `True` when used with other programs and languages.
 
-I've lost quite a few hours debugging Access's inexplicable ability to evaluate `True = True` situations to `False` when connecting to other programs.
+I've lost quite a few hours to debugging Access's inexplicable ability to evaluate `True = True` situations to `False` when connecting to other programs.
 
 Therefore, remember that these methods will pass "truthiness" directly from the AS400&#8212;and that any subsequent comparisons made in Access should be done with a defensive strategy in mind.
 
