@@ -9,7 +9,7 @@ https://www.ibm.com/support/knowledgecenter/SSEQ5Y_6.0.0/com.ibm.pcomm.doc/books
 
 ## Getting Started
 
-Just download the zip, extract the files, and then upload the main one ("cAS400.cls") into your VBA project like any other module.  (The VBA code can also be copy/paste'd into an existing VBA class file: just remove the header information--i.e., the lines from "VERSION..." to "ATTRIBUTE...")
+Just download the zip, extract the files, and then upload the main one ("cAS400.cls") into your VBA project like any other module.  This VBA code can also be copy/paste'd directly into an existing VBA class file: just remove the header information first (i.e., the lines at the top from "VERSION..." to "ATTRIBUTE...")
 
 More detailed instructions are listed in the Deployment section below.
 
