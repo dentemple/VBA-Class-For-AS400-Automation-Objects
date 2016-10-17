@@ -32,7 +32,7 @@ Troubleshooting these situations are beyond my current scope; however, I invite 
 
 ### Regarding the Long data type
 
-When handling client-side I/O, these iSeries automation objects prefer the Long data type when handling numerical values.
+When handling client-side I/O, the iSeries automation objects prefer the Long data type when handling numerical values.
 
 To remain consistent, this class file does the same, even in instances where an integer value would be more intuitive.
 
