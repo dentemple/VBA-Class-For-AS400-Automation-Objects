@@ -38,7 +38,7 @@ Troubleshooting these situations, however, are beyond my current scope.  Still, 
 
 When handling client-side I/O, the iSeries automation objects prefers data type Long when handling numerical values.
 
-To remain consistent, this class file does the same, even in instances where an integer value would be more intuitive.
+To remain consistent, this class file does the same, even in cases where an integer value would be more intuitive.
 
 ### Regarding booleans in MS Access
 
@@ -46,7 +46,7 @@ IF YOU ARE USING MS ACCESS, please remember that  MS Access `True` may not alway
 
 I've lost quite a few frustrating hours to Access's ability to inadvertently evaluate `True = True` situations to `False`.
 
-Therefore, remember that these methods will pass "truthiness" directly from the AS400--and that any subsequent comparisons made in Access should be done defensively.
+Therefore, remember that these methods will pass "truthiness" directly from the AS400&#8212;and that any subsequent comparisons made in Access should be done defensively.
 
 ### Regarding duplicate HACL methods
 
