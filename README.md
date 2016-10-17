@@ -34,9 +34,9 @@ Troubleshooting these situations, however, are beyond my current scope.  Still, 
 
 ## Code-specific notes
 
-### Regarding the Long data type
+### Regarding use of the Long data type
 
-When handling client-side I/O, the iSeries automation objects prefer the Long data type when handling numerical values.
+When handling client-side I/O, the iSeries automation objects prefers data type Long when handling numerical values.
 
 To remain consistent, this class file does the same, even in instances where an integer value would be more intuitive.
 
