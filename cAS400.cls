@@ -1,16 +1,6 @@
-VERSION 1.0 CLASS
-BEGIN
-  MultiUse = -1  'True
-END
-Attribute VB_Name = "cAs400"
-Attribute VB_GlobalNameSpace = False
-Attribute VB_Creatable = False
-Attribute VB_PredeclaredId = False
-Attribute VB_Exposed = False
-
 ''''''''''''''''''''''''''''''''''''''''''''''''''
 ' Organization:
-'   I.      Initialization
+'   I.      Initialization & custom procedures
 '   II.     Direct automation object wrappers
 '   III.    autECLConnList Class
 '   IV.     autECLPS Class
@@ -27,8 +17,7 @@ Attribute VB_Exposed = False
 Option Explicit
 
 ' Error Constants
-    Const ERROR_CODE_MAXRANGE As Long = 65535
-    Const CUSTOM_ERROR_CODE As Long = vbObjectError + ERROR_CODE_MAXRANGE
+    Const CUSTOM_ERROR_CODE As Long = vbObjectError + 65535     'Maximum possible value
     Const ERROR_SOURCE As String = "cAS400.Property"
     Const ASSERT_ERROR_DESCRIPTION As String = "Either the AS400 is not active, or " & _
         "the AS400 attempted an action prior to the completion of a previous operation."
@@ -49,8 +38,9 @@ Option Explicit
     Private pPrinterSettings As Object
     Private pPresentationSpace As Object
 
+
 ''''''''''''''''''''''''''''''''''''''''''''''''''
-' I. Initialization
+' I. Initialization & custom procedures
 ''''''''''''''''''''''''''''''''''''''''''''''''''
 Public Sub InitializeAS400(ByVal sessionName As String)
 
@@ -90,6 +80,33 @@ Private Sub AssertReady()
     End If
     
 End Sub
+
+Public Sub RunComponentTests()
+    
+    Debug.Print "== Run Test =="
+    Debug.Print ""
+    
+    With Me
+
+        Debug.Print "== App Status =="
+        Debug.Print "Is Started: " & .IsStarted
+        Debug.Print "Is Connected: " & .IsConnected
+        Debug.Print "Is Enabled: " & .IsEnabled
+        Debug.Print "Is Ready: " & .IsReady
+        Debug.Print ""
+        Debug.Print "== autECLPS Class =="
+        Debug.Print "Rows & Cols Count: (" & .RowsCount & ", " & .ColumnsCount & ")"
+        Debug.Print "Cursor Position: (" & .CursorPositionRow & ", " & .CursorPositionColumn & ")"
+        Debug.Print "Current Session: " & .CurrentConnectionName & ", " & _
+            .CurrentConnectionHandle & ", " & .CurrentConnectionType
+            
+    End With
+    
+    Debug.Print ""
+    Debug.Print "== End Test =="
+
+End Sub
+
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
 ' II. Direct automation object wrappers
@@ -180,7 +197,7 @@ End Property
 Public Property Get CursorPositionColumn() As Long
     AssertReady
     RefreshConnections
-    CursorPositionRow = Me.PresentationSpaceObject.CursorPosCol
+    CursorPositionColumn = Me.PresentationSpaceObject.CursorPosCol
 End Property
 
 Public Property Get CurrentConnectionName() As String
@@ -195,12 +212,12 @@ End Property
 
 Public Property Get CurrentConnectionType() As String
     AssertReady
-    CurrentConnectionHandle = Me.PresentationSpaceObject.ConnType
+    CurrentConnectionType = Me.PresentationSpaceObject.ConnType
 End Property
 
 Public Property Get CurrentCodePage() As Long
     AssertReady
-    CurrentConnectionHandle = Me.PresentationSpaceObject.CodePage
+    CurrentCodePage = Me.PresentationSpaceObject.CodePage
 End Property
 
 Public Property Get IsStarted() As Boolean
@@ -226,4 +243,3 @@ End Property
 ' The autECLOIA object retrieves status from the Host Operator Information Area.
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
-
