@@ -22,7 +22,7 @@ This file assumes that your VBA code can access the iSeries directly, such as th
 
 If an additional layer exists between you and the iSeries--for example, if you are on a thin-client, or if your company utilizes an web-interface to access the AS400--then additional steps may need to be taken to successfully utilize the HACL objects.
 
-This may be as simple as early-binding the HACL or changing a network setting; or, it can be as complicated as integrating this code with a web-scraper.
+This may be as simple as early-binding the HACL or flipping over a single a network setting; or, it can be as complicated as integrating this code with an automated web-scraper built from scratch with JavaScript.
 
 (Because heavens forbid we actually change anything on the iSeries' backend to make everyone's lives easier).
 
