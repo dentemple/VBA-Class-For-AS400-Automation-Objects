@@ -26,7 +26,7 @@ This may be as simple as early-binding the HACL or flipping over a single networ
 
 (Because heavens forbid we actually change anything on the iSeries' backend to make everyone's lives easier).
 
-Troubleshooting these situations are, however, beyond my current scope.  Still, I invite the community at large to copy or extend these files with their own solutions regarding these issues.
+Troubleshooting these situations, however, are beyond my current scope.  Still, I invite the community at large to copy or extend these files with their own solutions regarding these issues.
 
 ## Optional Pre-Download Test
 
