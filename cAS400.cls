@@ -22,7 +22,9 @@ Option Explicit
     Const ASSERT_ERROR_DESCRIPTION As String = "Either the AS400 is not active, or " & _
         "the AS400 attempted an action prior to the completion of a previous operation."
         
-' Internal Constants
+' AS400 magic values
+    Const SEARCH_FORWARD As Long = 1
+    Const SEARCH_BACKWARD As Long = 2
 
 ' iSeries automation objects (properties)
     Private pConnectionList As Object
@@ -233,9 +235,74 @@ Public Property Get IsEnabled() As Boolean
 End Property
 
 Public Property Get IsReady() As Boolean
-    ' Checks .Started, .CommStarted, and .APIEnabled
+    ' Implicitely includes the .Started, .CommStarted, and .APIEnabled properties
     IsReady = PresentationSpaceObject.Ready
 End Property
+
+Public Sub SetCursorPosition( _
+    ByVal targetRow As Long, _
+    ByVal targetCol As Long _
+    )
+    
+    AssertReady
+    Me.PresentationSpaceObject targetRow, targetCol
+    
+End Sub
+
+Public Sub SendKeys( _
+    ByVal textToSend As String, _
+    Optional ByVal targetRow As Long = -1, _
+    Optional ByVal targetCol As Long = -1 _
+    )
+    
+    AssertReady
+    If targetRow > 0 And targetCol > 0 Then
+        Me.PresentationSpaceObject.SendKeys textToSend, targetRow, targetCol
+    Else
+        Me.PresentationSpaceObject.SendKeys textToSend
+    End If
+    
+End Sub
+
+Public Property Get SearchText( _
+    ByVal textToSearch As String, _
+    Optional ByVal searchDirection As Long = SEARCH_FORWARD, _
+    Optional ByVal startRow As Long = -1, _
+    Optional ByVal startCol As Long = -1 _
+    ) As Boolean
+    
+    AssertReady
+    If startRow > 0 And startCol > 0 Then
+        SearchText = Me.PresentationSpaceObject.SearchText( _
+            textToSearch, searchDirection, startRow, startCol)
+    Else
+        SearchText = Me.PresentationSpaceObject.SearchText( _
+            textToSearch, searchDirection)
+    End If
+    
+End Property
+
+Public Property Get GetText( _
+    ByVal targetRow As Long, _
+    ByVal targetCol As Long, _
+    ByVal numberChars As Long _
+    )
+    
+    AssertReady
+    GetText = Me.PresentationSpaceObject(targetRow, targetCol, numberChars)
+    
+End Property
+
+Public Sub SetText( _
+    ByVal textToSet As String, _
+    ByVal targetRow As Long, _
+    ByVal targetCol As Long _
+    )
+    
+    AssertReady
+    Me.PresentationSpaceObject.SetText textToSet, targetRow, targetCol
+    
+End Sub
 
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
