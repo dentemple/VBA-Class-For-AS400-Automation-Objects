@@ -14,7 +14,7 @@ Just download the zip, extract the files, and then upload the main one ("cAS400.
 
 More detailed instructions are listed in the Deployment section below.
 
-An optional module has also been included that provides example usage and additional testing information
+An optional module has also been included that provides example usage and additional testing information.
 
 ### IMPORTANT NOTICE
 
@@ -22,7 +22,7 @@ This file assumes that your VBA code can access the iSeries directly, such as th
 
 If an additional layer exists between you and the iSeries&#8212;for example, if you are on a thin-client, or if your company utilizes a web-interface to access the AS400&#8212;then additional steps may need to be taken to successfully utilize the HACL objects.
 
-This may be as simple as early-binding the HACL or flipping over a single a network setting; or, it can be as complicated as integrating this code with an automated web-scraper built from scratch with JavaScript.
+This may be as simple as early-binding the HACL or flipping over a single network setting; or, it can be as complicated as integrating this code with an automated web-scraper built from scratch with JavaScript.
 
 (Because heavens forbid we actually change anything on the iSeries' backend to make everyone's lives easier).
 
