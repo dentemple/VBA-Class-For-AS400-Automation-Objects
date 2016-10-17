@@ -7,61 +7,21 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
+
 ''''''''''''''''''''''''''''''''''''''''''''''''''
 ' Organization:
-
-'   O.      Special notes & class-level declarations
 '   I.      Initialization
 '   II.     Direct automation object wrappers
 '   III.    autECLConnList Class
 '   IV.     autECLPS Class
 '   V.      autECLOIA Class
 
-''''''''''''''''''''''''''''''''''''''''''''''''''
-
-''''''''''''''''''''''''''''''''''''''''''''''''''
-' O. Special notes & class-level declarations
-''''''''''''''''''''''''''''''''''''''''''''''''''
-'       Created By:     Den Temple | dentemple.io
-'       Creation Date:  May 8, 2015
-'       Last Modified:
-
 ' Additional documentation for the automation objects can be found here: _
     http://
 
-' Regarding data types:
-
-'   Long vs Integer:
-
-        'The iSeries/AS400 automation objects usually inputs _
-        and outputs numerical values as Long; therefore, this _
-        class will do the same, even in cases where it makes _
-        more sense to use an integer value instead.
-        
-'   True & False:
-
-        'If you are using MS Access, please remember that _
-        the "True" value returned by this class may not be equal _
-        to the "True" value returned by Access. _
-        MS Access requires additional defensive measures to avoid _
-        situations where "True = True" will evaluate "False". _
-
-        'This class assumes that these measures are handled elsewhere _
-        and, therefore, will pass truthiness values directly from _
-        the AS400.
-        
-' Note regarding duplicate methods: _
-
-        'For situations where there are methods duplicated across _
-        multiple objects (such as with obj.Ready), this class only _
-        builds the autECLPS version (followed by autECLOIA and _
-        autECLConnMgr). This is purely a personal choice, given that _
-        I rely heavily on the autECLPS object in general.
-        
-        'The duplicate versions can still be used by calling its _
-        respective object directly (such as through the wrappers given _
-        in Section II)
-
+'       Created By:     Den Temple | dentemple.io
+'       Creation Date:  May 8, 2015
+'       Last Modified:
 ''''''''''''''''''''''''''''''''''''''''''''''''''
 
 Option Explicit
