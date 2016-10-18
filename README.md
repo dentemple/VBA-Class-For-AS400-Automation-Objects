@@ -36,7 +36,7 @@ Troubleshooting these situations, however, are beyond my current scope.  Still, 
 
 ### Code-smell
 
-This class is an anti-pattern.  If you are to integrate this code into a more permanent code0base, then I highly recommend refactoring this class into smaller chunks of single-responsibility.
+This class is an anti-pattern.  If you are to integrate this code into a more permanent code-base, then I highly recommend refactoring this class into smaller chunks of single-responsibility.
 
 It has been set-up this way, however, for two reasons:
 
