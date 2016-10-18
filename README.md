@@ -44,7 +44,7 @@ I've set it up this way, though, for two reasons:
 
 - To provide an drop-in resource for a relative beginner, who needs something practical quickly but may not be able to easily follow the flow of multiple of classes working in tandem.
 
-This isn't because I'm a bad coder.  Honest :)
+It isn't because I'm a bad coder.  Honest :)
 
 ### Regarding use of the Long data type
 
