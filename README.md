@@ -38,7 +38,7 @@ Troubleshooting these situations, however, are beyond my current scope.  Still, 
 
 This class is an anti-pattern.  If you are going to integrate this code into a more permanent code-base, then I highly recommend refactoring it into smaller chunks of single-responsibility and just using what you need.
 
-I've set it up this way, though, for two reasons:
+I've set it up this way, however, for two reasons:
 
 - To provide a succinct demonstration&#8212;and cheat sheet&#8212;for anyone looking to create VBA-to-AS400 glue applications
 
