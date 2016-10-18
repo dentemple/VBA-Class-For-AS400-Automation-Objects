@@ -34,18 +34,6 @@ Troubleshooting these situations, however, are beyond my current scope.  Still, 
 
 ## Code-specific notes
 
-### Code-smell
-
-This class is an anti-pattern.  If you are going to integrate this code into a more permanent code-base, then I highly recommend refactoring it into smaller chunks of single-responsibility and just using what you need.
-
-I've set it up this way, however, for two reasons:
-
-- To provide a succinct demonstration&#8212;and cheat sheet&#8212;for anyone looking to create VBA-to-AS400 glue applications
-
-- To provide an drop-in resource for a relative beginner, who needs something practical quickly but may not be able to easily follow the flow of multiple of classes working in tandem.
-
-It isn't because I'm a bad coder.  Honest :)
-
 ### Regarding use of the Long data type
 
 When handling client-side I/O, the iSeries automation objects prefers the Long data type when handling numerical values.
@@ -60,7 +48,13 @@ I've lost quite a few hours to debugging Access's inexplicable ability to evalua
 
 Therefore, remember that these methods will pass "truthiness" directly from the AS400&#8212;and that any subsequent comparisons made in Access should be done with a defensive strategy in mind.
 
-### Regarding duplicate HACL methods
+### Code-smell
+
+It's not quite the best approach to bundle all of these methods into a single class.  I'm just trying to keep the layout simple for people who...
+
+- Need a simple cheat sheet for common HACL methods, or
+
+- Need something quick to drop in to their project without having to worry about coupling issues
 
 ## Deployment
 
