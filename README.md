@@ -34,6 +34,18 @@ Troubleshooting these situations, however, are beyond my current scope.  Still, 
 
 ## Code-specific notes
 
+### Code-smell
+
+This class is an anti-pattern.  If you are to integrate this code into a more permanent code0base, then I highly recommend refactoring this class into smaller chunks of single-responsibility.
+
+It has been set-up this way, however, for two reasons:
+
+- To provide a succinct demonstration&#8212;and cheat sheet&#8212;for anyone looking to create VBA-to-AS400 glue applications
+
+- To provide an drop-in resource for a relative beginner, who needs something practical quickly but may not be able to easily follow the flow of multiple of classes working in tandem.
+
+This isn't because I'm a bad coder.  Honest :)
+
 ### Regarding use of the Long data type
 
 When handling client-side I/O, the iSeries automation objects prefers the Long data type when handling numerical values.
