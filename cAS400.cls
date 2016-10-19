@@ -2,7 +2,8 @@
 ' Organization:
 '   I.      Initialization & custom procedures
 '   II.     Direct automation object wrappers
-'   III.    autECLConnList Class
+'   III.    autECLConnMgr Class
+'   IV.     autECLConnList Class
 '   IV.     autECLPS Class
 '   V.      autECLOIA Class
 
@@ -25,19 +26,15 @@ Option Explicit
 ' AS400 magic values
     Const SEARCH_FORWARD As Long = 1
     Const SEARCH_BACKWARD As Long = 2
+    Const MINIMUM_MILLISECONDS As Long = 1
 
 ' iSeries automation objects (properties)
     Private pConnectionList As Object
     Private pConnectionManager As Object
     Private pOperatorInformation As Object
     Private pFieldList As Object
-    Private pScreenDescription As Object
-    Private pScreenRecognition As Object
     Private pSessionInformation As Object
     Private pWindowMetrics As Object
-    Private pFileTransfer As Object
-    Private pPageSettings As Object
-    Private pPrinterSettings As Object
     Private pPresentationSpace As Object
 
 
@@ -53,8 +50,6 @@ Public Sub InitializeAS400(ByVal sessionName As String)
     
     ' Must be set independently
     Set pConnectionManager = CreateObject("PCOMM.autECLConnMgr")
-    Set pScreenDescription = CreateObject("PCOMM.autECLScreenDesc")
-    Set pScreenRecognition = CreateObject("PCOMM.autECLScreenReco")
     Set pSessionInformation = CreateObject("PCOMM.autECLSession")
     
     ' Note: autECLSession session must be set prior to sub-classing _
@@ -66,9 +61,6 @@ Public Sub InitializeAS400(ByVal sessionName As String)
     Set pOperatorInformation = pSessionInformation.autECLOIA
     Set pPresentationSpace = pSessionInformation.autECLPS
     Set pWindowMetrics = pSessionInformation.autECLWinMetrics
-    Set pFileTransfer = pSessionInformation.autECLXfer
-    Set pPageSettings = pSessionInformation.autECLPageSettings
-    Set pPrinterSettings = pSessionInformation.autECLPrinterSettings
     
     ' Recommended by the documentation, but not required
     pConnectionList.Refresh
@@ -99,8 +91,7 @@ Public Sub RunComponentTests()
         Debug.Print "== autECLPS Class =="
         Debug.Print "Rows & Cols Count: (" & .RowsCount & ", " & .ColumnsCount & ")"
         Debug.Print "Cursor Position: (" & .CursorPositionRow & ", " & .CursorPositionColumn & ")"
-        Debug.Print "Current Session: " & .CurrentConnectionName & ", " & _
-            .CurrentConnectionHandle & ", " & .CurrentConnectionType
+        Debug.Print "Current Session: " & .CurrentConnectionName
             
     End With
     
@@ -108,7 +99,6 @@ Public Sub RunComponentTests()
     Debug.Print "== End Test =="
 
 End Sub
-
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
 ' II. Direct automation object wrappers
@@ -124,14 +114,6 @@ End Sub
 
 Public Property Get ConnectionManagerObject() As Object
     Set ConnectionManagerObject = pConnectionManager
-End Property
-
-Public Property Get ScreenDescriptionObject() As Object
-    Set ScreenDescriptionObject = pScreenDescription
-End Property
-
-Public Property Get ScreenRecognitionObject() As Object
-    Set ScreenRecognitionObject = pScreenRecognition
 End Property
 
 Public Property Get SessionInformationObject() As Object
@@ -152,18 +134,6 @@ End Property
 
 Public Property Get WindowMetricsObject() As Object
     Set WindowMetricsObject = pWindowMetrics
-End Property
-
-Public Property Get FileTransferObject() As Object
-    Set FileTransferObject = pFileTransfer
-End Property
-
-Public Property Get PageSettingsObject() As Object
-    Set PageSettingsObject = pPageSettings
-End Property
-
-Public Property Get PrinterSettingsObject() As Object
-    Set PrinterSettingsObject = pPrinterSettings
 End Property
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -205,21 +175,6 @@ End Property
 Public Property Get CurrentConnectionName() As String
     AssertReady
     CurrentConnectionName = Me.PresentationSpaceObject.Name
-End Property
-
-Public Property Get CurrentConnectionHandle() As Long
-    AssertReady
-    CurrentConnectionHandle = Me.PresentationSpaceObject.Handle
-End Property
-
-Public Property Get CurrentConnectionType() As String
-    AssertReady
-    CurrentConnectionType = Me.PresentationSpaceObject.ConnType
-End Property
-
-Public Property Get CurrentCodePage() As Long
-    AssertReady
-    CurrentCodePage = Me.PresentationSpaceObject.CodePage
 End Property
 
 Public Property Get IsStarted() As Boolean
@@ -301,6 +256,12 @@ Public Sub SetText( _
     
     AssertReady
     Me.PresentationSpaceObject.SetText textToSet, targetRow, targetCol
+    
+End Sub
+
+Public Sub Wait(Optional ByVal addMilliseconds As Long = MINIMUM_MILLISECONDS)
+    
+    Me.PresentationSpaceObject.Wait addMilliseconds
     
 End Sub
 
