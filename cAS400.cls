@@ -8,11 +8,11 @@
 '   V.      autECLOIA Class
 
 ' Additional documentation for the automation objects can be found here: _
-    http://
+    https://www.ibm.com/support/knowledgecenter/SSEQ5Y_6.0.0/com.ibm.pcomm.doc/books/html/host_access08.htm
 
 '       Created By:     Den Temple | dentemple.io
 '       Creation Date:  May 8, 2015
-'       Last Modified:
+'       Last Modified:  Nov 11, 2016
 ''''''''''''''''''''''''''''''''''''''''''''''''''
 
 Option Explicit
@@ -41,7 +41,7 @@ Option Explicit
 ''''''''''''''''''''''''''''''''''''''''''''''''''
 ' I. Initialization & custom procedures
 ''''''''''''''''''''''''''''''''''''''''''''''''''
-Public Sub InitializeAS400(ByVal sessionName As String)
+Public Sub InitializeApp(ByVal sessionName As String)
 
 ' Sets the initial connection to the iSeries/AS400
 ' Input: sessionName (string). The iseries provides a single alphabetical _
