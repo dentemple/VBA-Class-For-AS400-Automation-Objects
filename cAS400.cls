@@ -70,7 +70,13 @@ End Sub
 Private Sub AssertReady()
 
     If Me.IsReady = False Then
-        Err.Raise CUSTOM_ERROR_CODE, ERROR_SOURCE, ASSERT_ERROR_DESCRIPTION
+        Dim inhibitedCode As Long
+        inhibitedCode = Me.ReturnInhibitedCode
+        Err.Raise _
+            CUSTOM_ERROR_CODE, _
+            ERROR_SOURCE, _
+            ASSERT_ERROR_DESCRIPTION & vbNewLine & vbNewLine & _
+                "Inhibited Code: " & CStr(inhibitedCode)
     End If
     
 End Sub
@@ -270,4 +276,29 @@ End Sub
 ' V. autECLOIA Class
 ' The autECLOIA object retrieves status from the Host Operator Information Area.
 
-''''''''''''''''''''''''''''''''''''''''''''''''''
+''''''''''''''''''''''''''''''''''''''''''''''''''                                                                                                       
+Public Property Get ReturnInhibitedCode() As Long
+    ReturnInhibitedCode = Me.Operator.InputInhibited
+End Property
+                                                                                                                    
+Public Function WaitForInput() As Boolean
+    'Note: The AS/400 returns False if the timeout is exceeded
+    WaitForInput = Me.Operator.WaitForInputReady
+End Function
+
+Public Function WaitForApp() As Boolean
+    'Note: The AS/400 returns False if the timeout is exceeded
+    WaitForApp = Me.Operator.WaitForAppAvailable
+End Function
+
+Public Sub Wait(Optional addWaitTime As Long = 1)
+    Me.Presentation.Wait addWaitTime
+End Sub
+
+Public Sub Pause(Optional addWaitTime As Long = 1)
+    
+    Me.WaitForApp
+    Me.WaitForInput
+    Me.Wait addWaitTime
+
+End Sub
