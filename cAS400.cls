@@ -188,22 +188,21 @@ Public Property Get IsStarted() As Boolean
 End Property
 
 Public Property Get IsConnected() As Boolean
-    IsConnected = PresentationSpaceObject.CommStarted
+    IsConnected = Me.PresentationSpaceObject.CommStarted
 End Property
 
 Public Property Get IsEnabled() As Boolean
-    IsEnabled = PresentationSpaceObject.APIEnabled
+    IsEnabled = Me.PresentationSpaceObject.APIEnabled
 End Property
 
 Public Property Get IsReady() As Boolean
     ' Implicitely includes the .Started, .CommStarted, and .APIEnabled properties
-    IsReady = PresentationSpaceObject.Ready
+    IsReady = Me.PresentationSpaceObject.Ready
 End Property
 
 Public Sub SetCursorPosition( _
     ByVal targetRow As Long, _
-    ByVal targetCol As Long _
-    )
+    ByVal targetCol As Long)
     
     AssertReady
     Me.PresentationSpaceObject targetRow, targetCol
@@ -213,8 +212,7 @@ End Sub
 Public Sub SendKeys( _
     ByVal textToSend As String, _
     Optional ByVal targetRow As Long = -1, _
-    Optional ByVal targetCol As Long = -1 _
-    )
+    Optional ByVal targetCol As Long = -1)
     
     AssertReady
     If targetRow > 0 And targetCol > 0 Then
@@ -246,8 +244,7 @@ End Property
 Public Property Get GetText( _
     ByVal targetRow As Long, _
     ByVal targetCol As Long, _
-    ByVal numberChars As Long _
-    )
+    ByVal numberChars As Long)
     
     AssertReady
     GetText = Me.PresentationSpaceObject(targetRow, targetCol, numberChars)
@@ -257,8 +254,7 @@ End Property
 Public Sub SetText( _
     ByVal textToSet As String, _
     ByVal targetRow As Long, _
-    ByVal targetCol As Long _
-    )
+    ByVal targetCol As Long)
     
     AssertReady
     Me.PresentationSpaceObject.SetText textToSet, targetRow, targetCol
@@ -276,7 +272,7 @@ End Sub
 ' V. autECLOIA Class
 ' The autECLOIA object retrieves status from the Host Operator Information Area.
 
-''''''''''''''''''''''''''''''''''''''''''''''''''                                                                                                       
+''''''''''''''''''''''''''''''''''''''''''''''''''
 Public Property Get ReturnInhibitedCode() As Long
     ReturnInhibitedCode = Me.Operator.InputInhibited
 End Property
