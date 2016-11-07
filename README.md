@@ -8,7 +8,7 @@ Not every single method has been included yet, just many of the ones I've tested
 
 https://www.ibm.com/support/knowledgecenter/SSEQ5Y_6.0.0/com.ibm.pcomm.doc/books/html/host_access08.htm
 
-(My hope is to eventually encapsulate every single method, time permitting).
+(My hope is to eventually test, organize, and encapsulate every single HACL method, time permitting).
 
 ## Getting Started
 
@@ -75,6 +75,4 @@ This file is a refactor of IBM's Host Access Class Library (HACL). IBM provides 
 
 https://www.ibm.com/support/knowledgecenter/SSEQ5Y_6.0.0/com.ibm.pcomm.doc/books/html/host_access08.htm
 
-Transformative use of the HACL created by me that doesn't necessarily fall under these guidelines is available for use under the [License].
-
-
+The transformative use of the HACL created by me is available for use under the MIT License.
