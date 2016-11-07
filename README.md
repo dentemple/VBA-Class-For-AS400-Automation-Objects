@@ -4,9 +4,11 @@ A self-contained class file for use in your Access or Excel projects.  This file
 
 This file simply refactors IBM's Host Access Class Library (HACL) for readability and ease-of-use.
 
-Not every single method has been included, just many of the ones I've tested and used live.  For the complete exhaustive list, visit the original documentation here (which is current as of October 2016):
+Not every single method has been included yet, just many of the ones I've tested and used live.  For the complete exhaustive list, visit the original documentation here (which is current as of October 2016):
 
 https://www.ibm.com/support/knowledgecenter/SSEQ5Y_6.0.0/com.ibm.pcomm.doc/books/html/host_access08.htm
+
+(My hope is to eventually encapsulate every single method, time permitting).
 
 ## Getting Started
 
@@ -30,7 +32,11 @@ Troubleshooting these situations, however, are beyond my current scope.  Still, 
 
 ## Optional Pre-Download Test
 
+[...]
+
 ## Example Usage
+
+[...]
 
 ## Code-specific notes
 
@@ -48,15 +54,16 @@ I've lost quite a few hours to debugging Access's inexplicable ability to evalua
 
 Therefore, remember that these methods will pass "truthiness" directly from the AS400&#8212;and that any subsequent comparisons made in Access should be done with a defensive strategy in mind.
 
-### Code-smell
-
-It's not quite the best approach to bundle all of these methods into a single class.  I'm just trying to keep the layout simple for people who...
-
-- Need a simple cheat sheet for common HACL methods, or
-
-- Need something quick to drop in to their project without having to worry about coupling issues
 
 ## Deployment
+
+[...]
+
+## To Do
+
+- Encapsulate more methods
+
+- Move each automation object into their own class files
 
 ## Author
 
@@ -68,6 +75,6 @@ This file is a refactor of IBM's Host Access Class Library (HACL). IBM provides 
 
 https://www.ibm.com/support/knowledgecenter/SSEQ5Y_6.0.0/com.ibm.pcomm.doc/books/html/host_access08.htm
 
-Use of the HACL itself should defer to IBM's usage guidelines.  
+Transformative use of the HACL created by me that doesn't necessarily fall under these guidelines is available for use under the [License].
 
-Any transformative code made by me that doesn't necessarily fall under these guidelines is available for use under the [License].
+
