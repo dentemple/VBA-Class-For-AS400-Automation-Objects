@@ -1,12 +1,14 @@
-''''''''''''''''''''''''''''''''''''''''''''''''''
-' Organization:
-'   I.      Initialization & custom procedures
-'   II.     Direct automation object wrappers
-'   III.    autECLConnMgr Class
-'   IV.     autECLConnList Class
-'   IV.     autECLPS Class
-'   V.      autECLOIA Class
+VERSION 1.0 CLASS
+BEGIN
+  MultiUse = -1  'True
+END
+Attribute VB_Name = "cAS400"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = False
+Attribute VB_Exposed = False
 
+''''''''''''''''''''''''''''''''''''''''''''''''''
 ' Additional documentation for the automation objects can be found here: _
     https://www.ibm.com/support/knowledgecenter/SSEQ5Y_6.0.0/com.ibm.pcomm.doc/books/html/host_access08.htm
 
@@ -22,8 +24,11 @@ Option Explicit
     Const ERROR_SOURCE As String = "cAS400.Property"
     Const ASSERT_ERROR_DESCRIPTION As String = "Either the AS400 is not active, or " & _
         "the AS400 attempted an action prior to the completion of a previous operation."
+    Const SESSION_ERROR_DESCRIPTION As String = "The AS400 session name must be a single " & _
+        "alphabetical character."
         
 ' AS400 magic values
+    Const SESSION_NAME_LENGTH As Integer = 1
     Const SEARCH_FORWARD As Long = 1
     Const SEARCH_BACKWARD As Long = 2
     Const MINIMUM_MILLISECONDS As Long = 1
@@ -48,28 +53,42 @@ Public Sub InitializeApp(ByVal sessionName As String)
     character to each application window, which can be called by name. _
     By default, the very first window is given the letter "A".
     
-    ' Must be set independently
-    Set pConnectionManager = CreateObject("PCOMM.autECLConnMgr")
-    Set pSessionInformation = CreateObject("PCOMM.autECLSession")
+    If Len(sessionName) = SESSION_NAME_LENGTH Then
     
-    ' Note: autECLSession session must be set prior to sub-classing _
-        any additional classes under it.
-    pSessionInformation.SetConnectionByName (sessionName)
+        ' Must be set independently
+        Set pConnectionManager = CreateObject("PCOMM.autECLConnMgr")
+        Set pSessionInformation = CreateObject("PCOMM.autECLSession")
+        
+        ' Note: autECLSession session must be set prior to sub-classing _
+            any additional classes under it.
+        pSessionInformation.SetConnectionByName (sessionName)
+        
+        ' Can be connected to a higher object for convenience
+        Set pConnectionList = pConnectionManager.autECLConnList
+        Set pOperatorInformation = pSessionInformation.autECLOIA
+        Set pPresentationSpace = pSessionInformation.autECLPS
+        Set pWindowMetrics = pSessionInformation.autECLWinMetrics
+        
+        ' Recommended by the documentation, but not required
+        pConnectionList.Refresh
+        
+    Else
     
-    ' Can be connected to a higher object for convenience
-    Set pConnectionList = pConnectionManager.autECLConnList
-    Set pOperatorInformation = pSessionInformation.autECLOIA
-    Set pPresentationSpace = pSessionInformation.autECLPS
-    Set pWindowMetrics = pSessionInformation.autECLWinMetrics
+        Err.Raise _
+            CUSTOM_ERROR_CODE, _
+            ERROR_SOURCE, _
+            SESSION_ERROR_DESCRIPTION
     
-    ' Recommended by the documentation, but not required
-    pConnectionList.Refresh
+    End If
+    
+    
     
 End Sub
 
-Private Sub AssertReady()
+Public Sub AssertReady()
 
     If Me.IsReady = False Then
+    
         Dim inhibitedCode As Long
         inhibitedCode = Me.ReturnInhibitedCode
         Err.Raise _
@@ -77,6 +96,7 @@ Private Sub AssertReady()
             ERROR_SOURCE, _
             ASSERT_ERROR_DESCRIPTION & vbNewLine & vbNewLine & _
                 "Inhibited Code: " & CStr(inhibitedCode)
+                
     End If
     
 End Sub
@@ -210,33 +230,39 @@ Public Sub SetCursorPosition( _
 End Sub
 
 Public Sub SendKeys( _
-    ByVal textToSend As String, _
+    ByVal targetText As String, _
     Optional ByVal targetRow As Long = -1, _
-    Optional ByVal targetCol As Long = -1)
+    Optional ByVal targetCol As Long = -1, _
+    Optional ByVal addWait As Long = 0)
     
     AssertReady
+    
     If targetRow > 0 And targetCol > 0 Then
-        Me.PresentationSpaceObject.SendKeys textToSend, targetRow, targetCol
+        Me.PresentationSpaceObject.SendKeys targetText, targetRow, targetCol
     Else
-        Me.PresentationSpaceObject.SendKeys textToSend
+        Me.PresentationSpaceObject.SendKeys targetText
+    End If
+    
+    If addWait > 0 Then
+        Me.Wait addWait
     End If
     
 End Sub
 
 Public Property Get SearchText( _
-    ByVal textToSearch As String, _
+    ByVal targetText As String, _
     Optional ByVal searchDirection As Long = SEARCH_FORWARD, _
-    Optional ByVal startRow As Long = -1, _
-    Optional ByVal startCol As Long = -1 _
+    Optional ByVal targetRow As Long = -1, _
+    Optional ByVal targetCol As Long = -1 _
     ) As Boolean
     
     AssertReady
     If startRow > 0 And startCol > 0 Then
         SearchText = Me.PresentationSpaceObject.SearchText( _
-            textToSearch, searchDirection, startRow, startCol)
+            targetText, searchDirection, targetRow, targetCol)
     Else
         SearchText = Me.PresentationSpaceObject.SearchText( _
-            textToSearch, searchDirection)
+            targetText, searchDirection)
     End If
     
 End Property
@@ -247,17 +273,17 @@ Public Property Get GetText( _
     ByVal numberChars As Long)
     
     AssertReady
-    GetText = Me.PresentationSpaceObject(targetRow, targetCol, numberChars)
+    GetText = Me.PresentationSpaceObject.GetText(targetRow, targetCol, numberChars)
     
 End Property
 
 Public Sub SetText( _
-    ByVal textToSet As String, _
+    ByVal targetText As String, _
     ByVal targetRow As Long, _
     ByVal targetCol As Long)
     
     AssertReady
-    Me.PresentationSpaceObject.SetText textToSet, targetRow, targetCol
+    Me.PresentationSpaceObject.SetText targetText, targetRow, targetCol
     
 End Sub
 
@@ -274,27 +300,23 @@ End Sub
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
 Public Property Get ReturnInhibitedCode() As Long
-    ReturnInhibitedCode = Me.Operator.InputInhibited
+    ReturnInhibitedCode = Me.OperatorInformationObject.InputInhibited
 End Property
                                                                                                                     
 Public Function WaitForInput() As Boolean
     'Note: The AS/400 returns False if the timeout is exceeded
-    WaitForInput = Me.Operator.WaitForInputReady
+    WaitForInput = Me.OperatorInformationObject.WaitForInputReady
 End Function
 
 Public Function WaitForApp() As Boolean
     'Note: The AS/400 returns False if the timeout is exceeded
-    WaitForApp = Me.Operator.WaitForAppAvailable
+    WaitForApp = Me.OperatorInformationObject.WaitForAppAvailable
 End Function
 
-Public Sub Wait(Optional addWaitTime As Long = 1)
-    Me.Presentation.Wait addWaitTime
-End Sub
-
-Public Sub Pause(Optional addWaitTime As Long = 1)
+Public Sub Pause(Optional addWait As Long = 1)
     
     Me.WaitForApp
     Me.WaitForInput
-    Me.Wait addWaitTime
+    Me.Wait addWait
 
 End Sub
