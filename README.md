@@ -1,4 +1,4 @@
-(Note: WIP)
+(Note: This is project is still a WIP)
 
 # VBA Wrappers For AS400 Automation Objects
 
