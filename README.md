@@ -1,5 +1,3 @@
-(Note: This is project is still a WIP)
-
 # VBA Wrappers For AS400 Automation Objects
 
 A self-contained class file for use in your Access or Excel projects.  This file contains late-binded class methods that will allow you&#8212;the power user&#8212;to control an iSeries (AS400) client-side interface.
